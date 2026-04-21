@@ -1,0 +1,8 @@
+{
+  "name": "Vedic Jyotish Pro By Kasun",
+  "description": "Professional Vedic Astrology application featuring high-precision planetary calculations, Kundli matching (Ashta Koota), and personalized AI-driven daily horoscopes.",
+  "requestFramePermissions": [
+    "geolocation"
+  ],
+  "majorCapabilities": []
+}
