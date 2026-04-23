@@ -171,13 +171,13 @@ export default function App() {
       Mix ancient traditional Jyotish wisdom with modern strategic guidance. Be extremely detailed and exhaustive.`;
 
       const response = await ai.models.generateContent({
-        model: "gemini-3.1-pro-preview",
+        model: "gemma-4-26b-a4b-it",
         contents: `${prompt}\n\nIMPORTANT: PROVIDE THE ENTIRE RESPONSE IN THE ${currentLanguageName.toUpperCase()} LANGUAGE. Use traditional fonts or symbols if applicable in that language.`,
       });
       setPrediction(response.text || "Unable to generate prediction.");
     } catch (error) {
-      console.error(error);
-      setPrediction("Error connecting to astrological wisdom. Please try again.");
+      console.error("Error in getAIPrediction:", error);
+      setPrediction(`Error generating horoscope: ${error.message || "Unknown error"}`);
     } finally {
       setLoading(false);
     }
@@ -203,12 +203,12 @@ export default function App() {
       Explain significant life-shifting years and milestones based on these planetary periods.`;
 
       const response = await ai.models.generateContent({
-        model: "gemini-3.1-pro-preview",
+        model: "gemma-4-26b-a4b-it",
         contents: `${prompt}\n\nIMPORTANT: PROVIDE THE ENTIRE RESPONSE IN THE ${currentLanguageName.toUpperCase()} LANGUAGE.`,
       });
       setTimelinePrediction(response.text || "Unable to generate timeline.");
     } catch (error) {
-      console.error(error);
+      console.error("Error in getTimelineOverview:", error);
       setTimelinePrediction("Error reading the cosmic timeline.");
     } finally {
       setLoading(false);
@@ -251,13 +251,13 @@ export default function App() {
       Structure with bold headers: **Job & Career**, **Marriage & Relationships**, **Children**, **Personal & Health**.`;
 
       const response = await ai.models.generateContent({
-        model: "gemini-3.1-pro-preview", // Use Pro for complex reasoning
+        model: "gemma-4-26b-a4b-it",
         contents: `${prompt}\n\nIMPORTANT: PROVIDE THE ENTIRE RESPONSE IN THE ${currentLanguageName.toUpperCase()} LANGUAGE.`,
       });
-      setYearlyPrediction(response.text || "Unable to generate yearly prediction.");
+      setYearlyPrediction(response.response.text() || "Unable to generate yearly prediction.");
     } catch (error) {
-      console.error(error);
-      setYearlyPrediction("Error calculating yearly transits.");
+      console.error("Error in getYearlyPrediction:", error);
+      setYearlyPrediction(`Error generating yearly prediction: ${error.message || "Unknown error"}`);
     } finally {
       setLoadingYearly(false);
     }
